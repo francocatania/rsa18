@@ -1,13 +1,13 @@
 import React from 'react';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
-import HomeScreen from './src/components/HomeScreen';
-import AgendaScreen from './src/components/AgendaScreen';
-import MyTripScreen from './src/components/MyTripScreen';
-import MoreScreen from './src/components/MoreScreen';
+import HomeScreen from './src/components/screens/HomeScreen';
+import AgendaScreen from './src/components/screens/AgendaScreen';
+import MyTripScreen from './src/components/screens/MyTripScreen';
+import MoreScreen from './src/components/screens/MoreScreen';
 
 class App extends React.Component {
   render() {
@@ -39,11 +39,38 @@ const MoreStack = StackNavigator({
   MoreRoot: { screen: MoreScreen }
 });
 
-const TabNav = TabNavigator({
-  Home: { screen: HomeStack },
-  Agenda: { screen: AgendaStack },
-  'My Trip': { screen: MyTripStack },
-  More: { screen: MoreStack }
-});
+const TabNav = TabNavigator(
+  {
+    Inicio: { screen: HomeStack },
+    Agenda: { screen: AgendaStack },
+    'Mi Viaje': { screen: MyTripStack },
+    Más: { screen: MoreStack }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ios-home${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Agenda') {
+          iconName = `ios-list-box${focused ? '' : '-outline'}`;
+        }
+  
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        // return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: 'blue',
+      inactiveTintColor: 'gray',
+    },
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    animationEnabled: false,
+    swipeEnabled: false,
+  }
+);
 
 export default App;
