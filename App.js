@@ -1,9 +1,5 @@
 import React from 'react';
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
-import reducers from './src/reducers';
 import HomeScreen from './src/components/screens/HomeScreen';
 import AgendaScreen from './src/components/screens/AgendaScreen';
 import MyTripScreen from './src/components/screens/MyTripScreen';
@@ -12,12 +8,9 @@ import Login from './src/components/screens/Login';
 
 class App extends React.Component {
   render() {
-    // const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
+    const isLoggedIn = false;
     return (
-      <Provider store={null}>
-        <TabNav />
-      </Provider>
+      isLoggedIn ? <TabNav /> : <Login />
     );
   }
 }
@@ -37,7 +30,7 @@ const MyTripStack = StackNavigator({
 });
 
 const MoreStack = StackNavigator({
-  MoreRoot: { screen: Login }
+  MoreRoot: { screen: MoreScreen }
 });
 
 const TabNav = TabNavigator(
