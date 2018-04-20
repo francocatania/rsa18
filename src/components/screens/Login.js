@@ -61,14 +61,13 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '80%',
-    height: '70%',
-    // marginTop: 100,
+    height: '60%',
+    marginTop: 50,
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   welcome: {
     width: '80%',
-    // marginTop: 100,
   },
   headline: {
     fontSize: 30,
@@ -88,13 +87,14 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   fifaLogoBox: {
-    width: '100%',
-    height: '25%',
+    width: '40%',
+    height: '15%',
+    marginBottom: 20
   },
   fifaLogo: {
     height: '100%',
-    // width: '100%',
-    resizeMode: 'center',
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 
