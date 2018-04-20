@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import Weather from '../Weather';
 
 class HomeScreen extends Component {
@@ -16,11 +16,11 @@ class HomeScreen extends Component {
         <View style={styles.logosContainer}>
           <Image 
             source={{ uri: patagonikLogoURL }}
-            style={{ ...styles.logoImage, resizeMode: 'cover' }}
+            style={[styles.logoImage, { resizeMode: 'cover' }]}
           />
           <Image 
             source={{ uri: masterLogoURL }}
-            style={{ ...styles.logoImage, resizeMode: 'contain' }}
+            style={[styles.logoImage, { resizeMode: 'contain' }]}
           />
         </View>
         <Text style={styles.title}>Weather</Text>
@@ -30,7 +30,7 @@ class HomeScreen extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   pageContainer: {
     backgroundColor: '#333333', 
     flex: 1,
@@ -52,6 +52,6 @@ const styles = {
     color: 'white',
     marginTop: 6
   }
-};
+});
 
 export default HomeScreen;
