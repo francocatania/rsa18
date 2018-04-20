@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 class Weather extends Component {
   render() {
     return (
-      <View style={{ ...styles.container, height: 100, width: '100%' }}>
+      <View style={[styles.container, { height: 100, width: '100%' }]}>
         <Text>Moscow, 14 grados Celsios xD</Text>
+        <Text>To be continued..</Text>
       </View>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     borderWidth: 1,
@@ -23,10 +24,8 @@ const styles = {
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-    marginLeft: 5,
-    marginRight: 5,
     marginTop: 10
   }
-};
+});
 
 export default Weather;
