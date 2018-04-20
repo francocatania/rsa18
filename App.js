@@ -8,6 +8,7 @@ import HomeScreen from './src/components/screens/HomeScreen';
 import AgendaScreen from './src/components/screens/AgendaScreen';
 import MyTripScreen from './src/components/screens/MyTripScreen';
 import MoreScreen from './src/components/screens/MoreScreen';
+import Login from './src/components/screens/Login';
 
 class App extends React.Component {
   render() {
@@ -36,7 +37,7 @@ const MyTripStack = StackNavigator({
 });
 
 const MoreStack = StackNavigator({
-  MoreRoot: { screen: MoreScreen }
+  MoreRoot: { screen: Login }
 });
 
 const TabNav = TabNavigator(
