@@ -84,7 +84,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderStyle: 'solid',
     borderBottomColor: 'white',
-    color: 'white'
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 18
   },
   fifaLogoBox: {
     width: '40%',
