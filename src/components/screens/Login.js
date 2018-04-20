@@ -25,6 +25,9 @@ class Login extends Component {
                     style={styles.textInput} 
                     placeholder='Ingrese su código'
                     placeholderTextColor='white'
+                    onChangeText={this.props.onChange}
+                    value={this.props.loginText}
+                    autoCorrect={false}
                   />
                 </View>
               </View>

@@ -7,10 +7,30 @@ import MoreScreen from './src/components/screens/MoreScreen';
 import Login from './src/components/screens/Login';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loginText: '',
+      isLoggedIn: false,
+      loginCodes: ['Adminadmin', 'Consolid123']
+    };
+  }
+  
+  onChangeLoginText(text) {
+    this.setState({ loginText: text }, this.checkLoginText);
+  }
+  
+  checkLoginText() {
+    if (this.state.loginCodes.includes(this.state.loginText)) {
+      this.setState({ isLoggedIn: true });
+    }
+  }
+
   render() {
-    const isLoggedIn = false;
     return (
-      isLoggedIn ? <TabNav /> : <Login />
+      this.state.isLoggedIn ? 
+        <TabNav /> :
+        <Login onChange={this.onChangeLoginText.bind(this)} loginText={this.state.loginText} />
     );
   }
 }
