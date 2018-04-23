@@ -18,7 +18,7 @@ class HomeScreen extends Component {
             source={{ uri: patagonikLogoURL }}
             style={[styles.logoImage, { resizeMode: 'cover' }]}
           />
-          <Image 
+          <Image
             source={{ uri: masterLogoURL }}
             style={[styles.logoImage, { resizeMode: 'contain' }]}
           />

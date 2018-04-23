@@ -1,64 +1,78 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, TextInput } from 'react-native';
+import { 
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TextInput,
+  KeyboardAvoidingView,
+  Animated
+} from 'react-native';
 
 class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      fadeAnim: new Animated.Value(0)
+    };
+  }
+
+  componentDidMount() {
+    Animated.timing(
+      this.state.fadeAnim,
+      {
+        toValue: 1,
+        duration: 1000
+      }
+    ).start();
+  }
 
   render() {
     const fifaWorldCupLogoURL = 'http://pluspng.com/img-png/logo-fifa-world-cup-2018-png-ih0-redbubble-net-image-144004343-2754-sticker-375x360-u4-png-375.png';
-    const russiaImage = 'https://s-i.huffpost.com/gen/1283653/images/o-RUSSIAN-HISTORY-facebook.jpg';
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.backdrop} 
-          source={{ uri: russiaImage }}
-        >
-            <View style={styles.backdropView}>
-
-              <View style={styles.content}>
-                <View style={styles.welcome}>
-                  <Text style={styles.headline}>Bienvenido</Text>
-                  <Text style={styles.headline}>Welcome</Text>
-                  <Text style={styles.headline}>желанный</Text>
-                </View>
-                <View style={styles.welcome}>
-                  <TextInput 
-                    style={styles.textInput} 
-                    placeholder='Ingrese su código'
-                    placeholderTextColor='white'
-                    onChangeText={this.props.onChange}
-                    value={this.props.loginText}
-                    autoCorrect={false}
-                  />
-                </View>
-              </View>
-
-              <View style={styles.fifaLogoBox}>
-                <Image 
-                  source={{ uri: fifaWorldCupLogoURL }}
-                  style={styles.fifaLogo}
-                />
-              </View>
-
+      <Animated.View style={[styles.container, { opacity: this.state.fadeAnim }]}>
+        <View style={styles.backdropView}>
+          <KeyboardAvoidingView style={styles.content} behavior="padding" enabled>
+            <View style={styles.welcome}>
+              <Text style={styles.headline}>Bienvenido</Text>
+              <Text style={styles.headline}>Welcome</Text>
+              <Text style={styles.headline}>желанный</Text>
             </View>
-        </ImageBackground>
-      </View>
+            <View style={styles.welcome}>
+              <TextInput 
+                style={styles.textInput} 
+                placeholder='Ingrese su código'
+                placeholderTextColor='white'
+                onChangeText={this.props.onChange}
+                value={this.props.loginText}
+                autoCorrect={false}
+                underlineColorAndroid="#00000000"
+              />
+            </View>
+          </KeyboardAvoidingView>
+
+          <View style={styles.fifaLogoBox}>
+            <Image 
+              source={{ uri: fifaWorldCupLogoURL }}
+              style={styles.fifaLogo}
+            />
+          </View>
+        </View>
+      </Animated.View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
+    width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  backdrop: {
+  backdropView: {
     width: '100%',
     height: '100%',
-  },
-  backdropView: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.6)',
     alignItems: 'center',
     justifyContent: 'space-between',
   },

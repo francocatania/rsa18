@@ -5,32 +5,12 @@ import AgendaScreen from './src/components/screens/AgendaScreen';
 import MyTripScreen from './src/components/screens/MyTripScreen';
 import MoreScreen from './src/components/screens/MoreScreen';
 import Login from './src/components/screens/Login';
+import SplashScreen from './src/components/screens/SplashScreen';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loginText: '',
-      isLoggedIn: true,
-      loginCodes: ['Adminadmin', 'Consolid123']
-    };
-  }
-  
-  onChangeLoginText(text) {
-    this.setState({ loginText: text }, this.checkLoginText);
-  }
-  
-  checkLoginText() {
-    if (this.state.loginCodes.includes(this.state.loginText)) {
-      this.setState({ isLoggedIn: true });
-    }
-  }
-
   render() {
     return (
-      this.state.isLoggedIn ? 
-        <TabNav /> :
-        <Login onChange={this.onChangeLoginText.bind(this)} loginText={this.state.loginText} />
+      <SplashLoginStack />
     );
   }
 }
@@ -84,6 +64,24 @@ const TabNav = TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled: false,
+  }
+);
+
+const SplashLoginStack = StackNavigator(
+  {
+    Splash: {
+      screen: SplashScreen
+    },
+    Login: {
+      screen: Login
+    },
+    HomeRoutes: {
+      screen: TabNav
+    }
+  },
+  {
+    headerMode: 'none',
+    gesturesEnabled: false
   }
 );
 
