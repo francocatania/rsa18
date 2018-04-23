@@ -1,29 +1,54 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, Image, ScrollView, Vibration } from 'react-native';
 
 const hotelUrl = 'https://gbsn.org/wp-content/uploads/2017/03/olympic-hotel.jpg';
+const hotelUrl2 = 'https://images.trvl-media.com/hotels/1000000/10000/7800/7736/7736_195_z.jpg';
+const hotelUrl3 = 'https://t-ec.bstatic.com/images/hotel/max1024x768/328/32837688.jpg';
 
-const Hotel = ({ hotelName, hotelNameRussian, hotelImgs, address, addressRussian, hotelTelephone, hotelMail, hotelWebsite }) => {
+const { width } = Dimensions.get('window');
+const Hotel = ({ 
+  hotelName, 
+  hotelNameRussian, 
+  hotelImgs, 
+  address, 
+  addressRussian, 
+  hotelTelephone, 
+  hotelMail, 
+  hotelWebsite 
+}) => {
   const { 
+    screen,
     cardContainer,
     hotelImage,
     hotelTitle,
-    hotelSubtitle
+    hotelSubtitle,
+    carousel,
+    imgContainer
 
   } = styles;
   
   return (
-    <View style={cardContainer}>
-      <Image source={{ uri: hotelUrl }} style={hotelImage} />
-      <Text style={hotelTitle}>Azimut Moscow</Text>
-      <Text style={hotelSubtitle}>Azefhsldkjf Mascaw</Text>
+    <View style={screen}>
+      <View style={cardContainer}>
+        <ScrollView horizontal style={carousel} pagingEnabled showsHorizontalScrollIndicator={false}>
+          <Image source={{ uri: hotelUrl }} style={hotelImage} />
+          <Image source={{ uri: hotelUrl2 }} style={hotelImage} />
+          <Image source={{ uri: hotelUrl3 }} style={hotelImage} />
+        </ScrollView>
+        <Text style={hotelTitle}>Azimut Moscow</Text>
+        <Text style={hotelSubtitle}>Azefhsldkjf Mascaw</Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: '#FFFFFF'
+  },
   cardContainer: {
-    backgroundColor: 'lightblue',
+    backgroundColor: '#F8F8F8',
     // height: 100,
     width: '95%',
     alignSelf: 'center',
@@ -37,22 +62,23 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     overflow: 'hidden'
   },
-  hotelImage: {
+  carousel: {
     height: 300,
     width: '100%',
-    resizeMode: 'cover',
+    backgroundColor: 'red'
   },
-
+  hotelImage: {
+    width: width - 20,
+    resizeMode: 'cover'
+  },
   hotelTitle: {
     fontSize: 30,
     color: 'black'
   },
-
   hotelSubtitle: {
     fontSize: 18,
     color: 'grey'
   }
-  
 });
 
 export default Hotel;
