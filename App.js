@@ -11,7 +11,7 @@ class App extends React.Component {
     super();
     this.state = {
       loginText: '',
-      isLoggedIn: false,
+      isLoggedIn: true,
       loginCodes: ['Adminadmin', 'Consolid123']
     };
   }
