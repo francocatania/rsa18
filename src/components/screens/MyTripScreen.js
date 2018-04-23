@@ -1,18 +1,51 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-
-class MyTripScreen extends Component {
-  static navigationOptions = {
-    title: 'Mi Viaje',
+import * as React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+ 
+const initialLayout = {
+  height: 0,
+  width: Dimensions.get('window').width,
+};
+ 
+const FirstRoute = () => <View style={[styles.container, { backgroundColor: '#ff4081' }]} />;
+const SecondRoute = () => <View style={[styles.container, { backgroundColor: '#673ab7' }]} />;
+ 
+export default class TabView extends React.Component {
+  state = {
+    index: 0,
+    routes: [
+      { key: 'first', title: 'Vuelos' },
+      { key: 'second', title: 'Hoteles' },
+    ],
   };
-
+ 
+  handleIndexChange = index => this.setState({ index });
+ 
+  renderHeader = props => <TabBar {...props} style={styles.TabBar} />;
+ 
+  renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+  });
+ 
   render() {
     return (
-      <View>
-        <Text>This is the MyTrip Screen Lord Zucc</Text>
-      </View>
+      <TabViewAnimated
+        navigationState={this.state}
+        renderScene={this.renderScene}
+        renderHeader={this.renderHeader}
+        onIndexChange={this.handleIndexChange}
+        initialLayout={initialLayout}
+      />
     );
   }
 }
-
-export default MyTripScreen;
+ 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  TabBar: {
+    backgroundColor: 'black'
+  }
+});
