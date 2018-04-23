@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   TabBar: {
-    backgroundColor: 'black'
+    backgroundColor: '#3F51B5'
   }
 });
