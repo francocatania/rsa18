@@ -1,31 +1,58 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
-class Hotel extends Component {
-  render() {
-    return (
-      <View style={[styles.container, { height: 100, width: '100%' }]}>
-        <Text>Moscow, 14 grados Celsios xD</Text>
-        <Text>To be continued..</Text>
-      </View>
-    );
-  }
-}
+const hotelUrl = 'https://gbsn.org/wp-content/uploads/2017/03/olympic-hotel.jpg';
+
+const Hotel = ({ hotelName, hotelNameRussian, hotelImgs, address, addressRussian, hotelTelephone, hotelMail, hotelWebsite }) => {
+  const { 
+    cardContainer,
+    hotelImage,
+    hotelTitle,
+    hotelSubtitle
+
+  } = styles;
+  
+  return (
+    <View style={cardContainer}>
+      <Image source={{ uri: hotelUrl }} style={hotelImage} />
+      <Text style={hotelTitle}>Azimut Moscow</Text>
+      <Text style={hotelSubtitle}>Azefhsldkjf Mascaw</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
+  cardContainer: {
+    backgroundColor: 'lightblue',
+    // height: 100,
+    width: '95%',
+    alignSelf: 'center',
+    marginTop: 10,
+    borderRadius: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowRadius: 4,
     elevation: 1,
-    marginTop: 10
+    marginBottom: 15,
+    overflow: 'hidden'
+  },
+  hotelImage: {
+    height: 300,
+    width: '100%',
+    resizeMode: 'cover',
+  },
+
+  hotelTitle: {
+    fontSize: 30,
+    color: 'black'
+  },
+
+  hotelSubtitle: {
+    fontSize: 18,
+    color: 'grey'
   }
+  
 });
 
 export default Hotel;
