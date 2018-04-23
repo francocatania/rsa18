@@ -43,7 +43,7 @@ class SplashScreen extends Component {
     if (this.state.loginCodes.includes(this.state.loginText)) {
       try {
         await AsyncStorage.setItem('loginCode', this.state.loginText);
-        this.props.navigation.navigate('HomeRoutes');
+        this.resetNavigation('HomeRoutes');
       } catch (error) {
         console.log('Error setting item in AsyncStorage');
       }
