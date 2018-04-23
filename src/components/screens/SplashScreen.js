@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, ImageBackground, StyleSheet, AsyncStorage } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import Login from './Login';
 
 class SplashScreen extends Component {
@@ -16,7 +17,7 @@ class SplashScreen extends Component {
     setTimeout(() => {
       AsyncStorage.getItem('loginCode').then(response => {
         if (response) {
-          this.props.navigation.navigate('HomeRoutes');
+          this.resetNavigation('HomeRoutes');
         } else {
           this.setState({ showLogin: true });
         }
@@ -26,6 +27,16 @@ class SplashScreen extends Component {
 
   onChangeLoginText(text) {
     this.setState({ loginText: text }, this.checkLoginText);
+  }
+  
+  resetNavigation(targetRoute) {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: targetRoute }),
+      ]
+    });
+    this.props.navigation.dispatch(resetAction);
   }
   
   async checkLoginText() {
