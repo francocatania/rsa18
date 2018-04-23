@@ -1,21 +1,26 @@
 import * as React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import Hotel from '../Hotel';
+// import Flight from '../Flight';
  
 const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width,
 };
  
-const FirstRoute = () => <View style={[styles.container, { backgroundColor: '#ff4081' }]} />;
-const SecondRoute = () => <View style={[styles.container, { backgroundColor: '#673ab7' }]} />;
+const FirstRoute = () => <Hotel />;
+const SecondRoute = () => <View style={[styles.container, { backgroundColor: '#ff4081' }]} />;
  
 export default class TabView extends React.Component {
+  static navigationOptions = {
+    title: 'Mi Viaje',
+  };
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'Vuelos' },
-      { key: 'second', title: 'Hoteles' },
+      { key: 'first', title: 'Hoteles' },
+      { key: 'second', title: 'Vuelos' },
     ],
   };
  
