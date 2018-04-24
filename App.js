@@ -18,19 +18,59 @@ class App extends React.Component {
 // ROUTING - NAVIGATION
 
 const HomeStack = StackNavigator({
-  HomeRoot: { screen: HomeScreen }
+  HomeRoot: {
+    screen: HomeScreen,
+    navigationOptions: {
+      title: 'Inicio',
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#3F51B5',
+        borderBottomWidth: 0
+      }
+    }
+  }
 });
 
 const AgendaStack = StackNavigator({
-  AgendaRoot: { screen: AgendaScreen }
+  AgendaRoot: {
+    screen: AgendaScreen,
+    navigationOptions: {
+      title: 'Agenda',
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#3F51B5',
+        borderBottomWidth: 0
+      }
+    }
+  }
 });
 
 const MyTripStack = StackNavigator({
-  MyTripRoot: { screen: MyTripScreen }
+  MyTripRoot: {
+    screen: MyTripScreen,
+    navigationOptions: {
+      title: 'Mi Viaje',
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#3F51B5',
+        borderBottomWidth: 0
+      }
+    }
+  }
 });
 
 const MoreStack = StackNavigator({
-  MoreRoot: { screen: MoreScreen }
+  MoreRoot: {
+    screen: MoreScreen,
+    navigationOptions: {
+      title: 'Más',
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#3F51B5',
+        borderBottomWidth: 0
+      }
+    }
+  }
 });
 
 const TabNav = TabNavigator(
@@ -57,8 +97,11 @@ const TabNav = TabNavigator(
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'blue',
-      inactiveTintColor: 'gray',
+      activeTintColor: 'white',
+      inactiveTintColor: '#B0B0B0',
+      style: {
+        backgroundColor: '#3F51B5',
+      },
     },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',

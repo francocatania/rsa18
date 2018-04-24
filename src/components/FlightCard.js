@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   middleText: {
-    color: 'blue',
+    color: '#3F51B5',
     textAlign: 'center',
     fontSize: 10
   },
   middleLine: {
-    backgroundColor: 'blue',
+    backgroundColor: '#3F51B5',
     height: 2,
     marginTop: 2
   },

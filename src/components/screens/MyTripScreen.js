@@ -13,9 +13,6 @@ const FirstRoute = () => <Hotel />;
 const SecondRoute = () => <FlightScreen />;
  
 class MyTripScreen extends Component {
-  static navigationOptions = {
-    title: 'Mi Viaje',
-  };
   state = {
     index: 0,
     routes: [

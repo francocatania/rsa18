@@ -3,10 +3,6 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import Weather from '../Weather';
 
 class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Inicio',
-  };
-
   render() {
     const patagonikLogoURL = 'https://firebasestorage.googleapis.com/v0/b/autho-c54b4.appspot.com/o/patagonik_logo.png?alt=media&token=70c96e9f-2835-49a2-9c62-c3443f502e70';
     const masterLogoURL = 'http://adsynergy.co.uk/wp-content/uploads/2017/06/mastercard-logo1.png';

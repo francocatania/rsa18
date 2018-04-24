@@ -5,10 +5,6 @@ import FlightHeader from '../FlightHeader';
 import Card from '../Card';
 
 class AgendaScreen extends Component {
-  static navigationOptions = {
-    title: 'Agenda',
-  };
-
   constructor() {
     super();
     this.data = [

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, Button, AsyncStorage } from 'react-native';
 
 class MoreScreen extends Component {
-  static navigationOptions = {
-    title: 'Más',
-  };
-
   render() {
     return (
       <View>
