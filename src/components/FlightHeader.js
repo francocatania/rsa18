@@ -3,9 +3,9 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 
 const planeIcon = require('../assets/white-plane.png');
 
-const HeaderFlightCard = ({ origin, destination, airline, flightNumber }) => {
+const FlightHeader = ({ origin, destination, airline, flightNumber }) => {
   const { 
-    cardContainer,
+    container,
     backgroundImage,
     contentContainer,
     origDestContainer,
@@ -18,7 +18,7 @@ const HeaderFlightCard = ({ origin, destination, airline, flightNumber }) => {
   const parisImgURL = 'https://static.vix.com/es/sites/default/files/styles/large/public/btg/curiosidades.batanga.com/files/Curiosidades-sobre-la-Torre-Eiffel.jpg?itok=zU9Q27Sh';
   
   return (
-    <View style={cardContainer}>
+    <View style={container}>
       <Image source={{ uri: parisImgURL }} style={backgroundImage} />
       <View style={contentContainer}>
         <View style={origDestContainer}>
@@ -36,29 +36,19 @@ const HeaderFlightCard = ({ origin, destination, airline, flightNumber }) => {
 };
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    backgroundColor: '#000000',
-    height: 100,
-    borderRadius: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 1,
-    marginBottom: 15
+  container: {
+    height: 100
   },
   backgroundImage: {
     height: '100%',
     width: '100%',
-    position: 'absolute',
-    borderRadius: 4
+    position: 'absolute'
   },
   contentContainer: {
     backgroundColor: '#00000088',
     position: 'absolute',
     height: '100%',
-    width: '100%',
-    borderRadius: 4
+    width: '100%'
   },
   origDestContainer: {
     flexDirection: 'row',
@@ -86,4 +76,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HeaderFlightCard;
+export default FlightHeader;
