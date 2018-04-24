@@ -1,16 +1,20 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import FlightCard from '../FlightCard';
 
 const FlightScreen = () => (
-    <View style={styles.pageContainer}>
-      <FlightCard />
-      <FlightCard />
-    </View>
+    <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: '#F8F8F8' }}>
+      <View style={styles.pageContainer}>
+        <FlightCard />
+        <FlightCard />
+      </View>
+    </ScrollView>
 );
 
 const styles = StyleSheet.create({
   pageContainer: {
+    flex: 1,
+    backgroundColor: '#F8F8F8',
     padding: 10
   }
 });

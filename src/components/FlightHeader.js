@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-const planeIcon = require('../assets/white-plane.png');
+const planeIcon = require('../assets/plane_white.png');
 
 const FlightHeader = ({ origin, destination, airline, flightNumber }) => {
   const { 
@@ -54,7 +54,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    flex: 3
+    flex: 3,
+    marginLeft: 10,
+    marginRight: 10
   },
   lowContainer: {
     flexDirection: 'row',
@@ -63,7 +65,8 @@ const styles = StyleSheet.create({
   },
   origDestText: {
     color: 'white',
-    fontSize: 32
+    fontSize: 32,
+    fontWeight: '200'
   },
   airlineText: {
     color: 'white',
