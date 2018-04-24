@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Timeline from 'react-native-timeline-listview';
-import HeaderFlightCard from '../HeaderFlightCard';
+import FlightHeader from '../FlightHeader';
+import Card from '../Card';
 
 class AgendaScreen extends Component {
   static navigationOptions = {
@@ -45,7 +46,7 @@ class AgendaScreen extends Component {
     console.log(sectionId);
     console.log(rowId);
     if (rowData.type === 'flight') {
-      return <HeaderFlightCard {...rowData} />;
+      return <Card><FlightHeader {...rowData} /></Card>;
     }
     return <Text style={{ color: 'white', fontSize: 18, marginBottom: 15 }}>{rowData.title}</Text>;
   }

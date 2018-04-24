@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Dimensions } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import Hotel from '../Hotel';
-// import Flight from '../Flight';
+import FlightScreen from './FlightScreen';
  
 const initialLayout = {
   height: 0,
@@ -10,17 +10,17 @@ const initialLayout = {
 };
  
 const FirstRoute = () => <Hotel />;
-const SecondRoute = () => <View style={[styles.container, { backgroundColor: '#ff4081' }]} />;
+const SecondRoute = () => <FlightScreen />;
  
-export default class TabView extends React.Component {
+class MyTripScreen extends Component {
   static navigationOptions = {
     title: 'Mi Viaje',
   };
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'Hoteles' },
-      { key: 'second', title: 'Vuelos' },
+      { key: 'hoteles', title: 'Hoteles' },
+      { key: 'vuelos', title: 'Vuelos' },
     ],
   };
  
@@ -29,8 +29,8 @@ export default class TabView extends React.Component {
   renderHeader = props => <TabBar {...props} style={styles.TabBar} />;
  
   renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
+    hoteles: FirstRoute,
+    vuelos: SecondRoute,
   });
  
   render() {
@@ -54,3 +54,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#3F51B5'
   }
 });
+
+export default MyTripScreen;
