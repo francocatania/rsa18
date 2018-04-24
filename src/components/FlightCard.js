@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import HeaderFlightCard from './HeaderFlightCard';
+import { Text } from 'react-native';
+import FlightHeader from './FlightHeader';
+import Card from './Card';
 
 const FlightCard = () => {
   const demoDataForHeader = {
@@ -11,10 +12,10 @@ const FlightCard = () => {
   };
   
   return (
-    <View>
-      <HeaderFlightCard {...demoDataForHeader} />
+    <Card>
+      <FlightHeader {...demoDataForHeader} />
       <Text>This is the flightCard Lord Zucc</Text>
-    </View>
+    </Card>
   );
 };
 
