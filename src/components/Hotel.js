@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dimensions, StyleSheet, View, Text, Image, ScrollView } from 'react-native';
-import Card from './Card';
 
 const hotelUrl = 'https://gbsn.org/wp-content/uploads/2017/03/olympic-hotel.jpg';
 const hotelUrl2 = 'https://images.trvl-media.com/hotels/1000000/10000/7800/7736/7736_195_z.jpg';
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
   carousel: {
     height: 300,
     width: '100%',
-    backgroundColor: 'red'
   },
   hotelImage: {
     width: width - 20,
