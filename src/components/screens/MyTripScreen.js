@@ -23,7 +23,9 @@ class MyTripScreen extends Component {
  
   handleIndexChange = index => this.setState({ index });
  
-  renderHeader = props => <TabBar {...props} style={styles.TabBar} indicatorStyle={{ backgroundColor: 'white' }} />;
+  renderHeader = props => (
+    <TabBar {...props} style={styles.TabBar} indicatorStyle={{ backgroundColor: '#FFFFFF' }} />
+  )
  
   renderScene = SceneMap({
     hoteles: FirstRoute,
