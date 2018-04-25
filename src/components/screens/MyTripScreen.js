@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
-import Hotel from '../Hotel';
+import HotelScreen from './HotelScreen';
 import FlightScreen from './FlightScreen';
  
 const initialLayout = {
@@ -9,7 +9,7 @@ const initialLayout = {
   width: Dimensions.get('window').width,
 };
  
-const FirstRoute = () => <Hotel />;
+const FirstRoute = () => <HotelScreen />;
 const SecondRoute = () => <FlightScreen />;
  
 class MyTripScreen extends Component {
@@ -23,7 +23,7 @@ class MyTripScreen extends Component {
  
   handleIndexChange = index => this.setState({ index });
  
-  renderHeader = props => <TabBar {...props} style={styles.TabBar} />;
+  renderHeader = props => <TabBar {...props} style={styles.TabBar} indicatorStyle={{ backgroundColor: 'white' }} />;
  
   renderScene = SceneMap({
     hoteles: FirstRoute,
