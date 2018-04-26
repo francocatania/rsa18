@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import NewsList from '../NewsList';
 
 class HomeScreen extends Component {
   render() {
@@ -18,7 +19,8 @@ class HomeScreen extends Component {
             style={[styles.logoImage, { resizeMode: 'contain' }]}
           />
         </View>
-        <Text style={styles.title}>Weather</Text>
+        <Text style={styles.title}>Noticias</Text>
+        <NewsList />
       </View>
     );
   }
