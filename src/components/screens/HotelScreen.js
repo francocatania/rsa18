@@ -14,7 +14,6 @@ const HotelScreen = () => (
 const styles = StyleSheet.create({
   pageContainer: {
     padding: 10,
-    backgroundColor: '#F8F8F8'
   }
 });
 

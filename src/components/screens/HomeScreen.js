@@ -28,7 +28,6 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   pageContainer: {
-    backgroundColor: '#333333', 
     flex: 1,
     padding: 10
   },
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   title: {
-    color: 'white',
+    color: '#3F51B5',
     marginTop: 6
   }
 });
