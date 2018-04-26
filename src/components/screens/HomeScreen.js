@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import NewsList from '../NewsList';
 
 class HomeScreen extends Component {
@@ -8,20 +8,22 @@ class HomeScreen extends Component {
     const masterLogoURL = 'http://adsynergy.co.uk/wp-content/uploads/2017/06/mastercard-logo1.png';
 
     return (
-      <View style={styles.pageContainer}>
-        <View style={styles.logosContainer}>
-          <Image 
-            source={{ uri: patagonikLogoURL }}
-            style={[styles.logoImage, { resizeMode: 'cover' }]}
-          />
-          <Image
-            source={{ uri: masterLogoURL }}
-            style={[styles.logoImage, { resizeMode: 'contain' }]}
-          />
+      <ScrollView>
+        <View style={styles.pageContainer}>
+          <View style={styles.logosContainer}>
+            <Image 
+              source={{ uri: patagonikLogoURL }}
+              style={[styles.logoImage, { resizeMode: 'cover' }]}
+            />
+            <Image
+              source={{ uri: masterLogoURL }}
+              style={[styles.logoImage, { resizeMode: 'contain' }]}
+            />
+          </View>
+          <Text style={styles.title}>Noticias</Text>
+          <NewsList />
         </View>
-        <Text style={styles.title}>Noticias</Text>
-        <NewsList />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -44,6 +46,8 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   title: {
+    fontSize: 16,
+    fontWeight: 'bold',
     color: '#3F51B5',
     marginTop: 6
   }
