@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import Weather from '../Weather';
 
 class HomeScreen extends Component {
   render() {
@@ -20,7 +19,6 @@ class HomeScreen extends Component {
           />
         </View>
         <Text style={styles.title}>Weather</Text>
-        <Weather />
       </View>
     );
   }
