@@ -1,5 +1,6 @@
 import React from 'react';
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
+import firebase from 'firebase';
 import HomeScreen from './src/components/screens/HomeScreen';
 import AgendaScreen from './src/components/screens/AgendaScreen';
 import MyTripScreen from './src/components/screens/MyTripScreen';
@@ -8,6 +9,18 @@ import Login from './src/components/screens/Login';
 import SplashScreen from './src/components/screens/SplashScreen';
 
 class App extends React.Component {
+  componentDidMount() {
+    const config = {
+      apiKey: 'AIzaSyBh72i6uNdTBGj-j4FfG0O6DTZuXKFkeCs',
+      authDomain: 'evexp-rsa2018.firebaseapp.com',
+      databaseURL: 'https://evexp-rsa2018.firebaseio.com',
+      projectId: 'evexp-rsa2018',
+      storageBucket: 'evexp-rsa2018.appspot.com',
+      messagingSenderId: '135549760815'
+    };
+    firebase.initializeApp(config);
+  }
+
   render() {
     return (
       <SplashLoginStack />
