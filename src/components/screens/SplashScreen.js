@@ -9,7 +9,7 @@ class SplashScreen extends Component {
     this.state = {
       showLogin: false,
       loginText: '',
-      loginCodes: ['Adminadmin', 'Consolid123']
+      loginCodes: ['Admin', 'Consolid123']
     };
   }
 
