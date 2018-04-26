@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 
 const planeIcon = require('../assets/plane_white.png');
 
-const FlightHeader = ({ origin, destination, airline, flightNumber }) => {
+const FlightHeader = ({ origin, destination, airline, flightNumber, backdropURL }) => {
   const { 
     container,
     backgroundImage,
@@ -14,12 +14,10 @@ const FlightHeader = ({ origin, destination, airline, flightNumber }) => {
     airlineText,
     flightNumberText
   } = styles;
-
-  const parisImgURL = 'https://static.vix.com/es/sites/default/files/styles/large/public/btg/curiosidades.batanga.com/files/Curiosidades-sobre-la-Torre-Eiffel.jpg?itok=zU9Q27Sh';
   
   return (
     <View style={container}>
-      <Image source={{ uri: parisImgURL }} style={backgroundImage} />
+      <Image source={{ uri: backdropURL }} style={backgroundImage} />
       <View style={contentContainer}>
         <View style={origDestContainer}>
           <Text style={origDestText}>{origin}</Text>

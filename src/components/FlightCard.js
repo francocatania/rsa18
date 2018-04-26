@@ -4,37 +4,51 @@ import Card from './Card';
 import FlightHeader from './FlightHeader';
 import FlightColumn from './FlightColumn';
 
-const FlightCard = () => {
-  const demoDataForHeader = {
-    origin: 'EZE',
-    destination: 'CDG',
-    airline: 'AirFrance',
-    flightNumber: 'AF229'
+const FlightCard = (props) => {
+  const {
+    airline,
+    arrival,
+    departure,
+    backdropURL,
+    cabin,
+    destination,
+    origin,
+    flightNumber,
+    plane,
+    duration
+  } = props;
+
+  const dataForHeader = {
+    origin,
+    destination,
+    airline,
+    flightNumber,
+    backdropURL
   };
-  
+
   return (
     <Card style={{ marginBottom: 20 }}>
-      <FlightHeader {...demoDataForHeader} />
+      <FlightHeader {...dataForHeader} />
       <View style={styles.columnContainer}>
-        <FlightColumn />
+        <FlightColumn {...departure} />
         <View style={styles.middleColumnContainer}>
-          <Text style={styles.middleText}>12hs 40min</Text>
+          <Text style={styles.middleText}>{duration}</Text>
           <View style={styles.middleLine} />
         </View>
-        <FlightColumn isLanding />
+        <FlightColumn isLanding {...arrival} />
       </View>
       <View style={styles.footerContainer}>
         <View style={styles.textColumn}>
           <Text style={styles.footerField}>Avion</Text>
-          <Text style={styles.footerValue}>Airbus A380</Text>
+          <Text style={styles.footerValue}>{plane}</Text>
         </View>
         <View style={styles.textColumn}>
           <Text style={styles.footerField}>Cabina</Text>
-          <Text style={styles.footerValue}>Economy</Text>
+          <Text style={styles.footerValue}>{cabin}</Text>
         </View>
         <View style={styles.textColumn}>
           <Text style={styles.footerField}>Operado por</Text>
-          <Text style={styles.footerValue}>Air France</Text>
+          <Text style={styles.footerValue}>{airline}</Text>
         </View>
       </View>
     </Card>

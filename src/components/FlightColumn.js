@@ -4,7 +4,7 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 const takeoffIcon = require('../assets/takeoff_black.png');
 const landIcon = require('../assets/land_black.png');
 
-const FlightColumn = ({ isLanding }) => {
+const FlightColumn = ({ isLanding, time, date, airport }) => {
   const icon = isLanding
     ? landIcon
     : takeoffIcon;
@@ -12,9 +12,9 @@ const FlightColumn = ({ isLanding }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.icon} source={icon} />
-      <Text style={styles.dateLabel}>Mier. 09 de Julio</Text>
-      <Text style={styles.timeLabel}>13:37</Text>
-      <Text style={styles.airportLabel}>Aeropuerto Internacional Ministro Pistarini de Ezeiza</Text>
+      <Text style={styles.dateLabel}>{date}</Text>
+      <Text style={styles.timeLabel}>{time}</Text>
+      <Text style={styles.airportLabel}>{airport}</Text>
     </View>
   );
 };
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   timeLabel: {
-    fontSize: 48,
+    fontSize: 44,
     fontWeight: '200',
     margin: 3
   },
