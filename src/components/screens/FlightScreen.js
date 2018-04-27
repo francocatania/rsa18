@@ -20,20 +20,26 @@ class FlightScreen extends Component {
     });
   }
 
-  render() {
-    return this.state.flights ?
-      (
+  renderSpinner() {
+    return (
+      <View style={styles.spinnerContainer}>
+        <ActivityIndicator size="large" style={{ alignSelf: 'center' }} />
+      </View>
+    );
+  }
+
+  renderFlights() {
+    return (
       <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: '#F8F8F8' }}>
         <View style={styles.pageContainer}>
           {this.state.flights.map((flight, idx) => <FlightCard {...flight} key={idx} />)}
         </View>
       </ScrollView>
-      ) :
-      (
-        <View style={styles.spinnerContainer}>
-          <ActivityIndicator size="large" style={{ alignSelf: 'center' }} />
-        </View>
-      );
+    );
+  }
+
+  render() {
+    return this.state.flights ? this.renderFlights() : this.renderSpinner();
   }
 }
 
