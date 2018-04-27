@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import Timeline from 'react-native-timeline-listview';
+import firebase from 'firebase';
 import FlightHeader from '../FlightHeader';
 import Card from '../Card';
 
@@ -35,12 +36,29 @@ class AgendaScreen extends Component {
         description: 'Picnic con los rusos que estén paseando por ahí.'
       }
     ];
+    this.state = {
+      agenda: [],
+    };
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('loginCode')
+      .then(response => {
+        if (response) {
+          firebase.database().ref(`${this.state.appCode}/agenda`)
+            .once('value', snapshot => {
+              this.setState({ agenda: snapshot.val() }, console.log(this.state.agenda));
+            });
+        } else {
+          console.log('churros');
+        }
+      });
   }
 
   renderDetail(rowData, sectionId, rowId) {
-    console.log(rowData);
-    console.log(sectionId);
-    console.log(rowId);
+    // console.log(rowData);
+    // console.log(sectionId);
+    // console.log(rowId);
     if (rowData.type === 'flight') {
       return <Card><FlightHeader {...rowData} /></Card>;
     }
