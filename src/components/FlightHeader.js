@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, Platform } from 'react-native';
-import { verticalScale } from 'react-native-size-matters';
+import { scale, verticalScale } from 'react-native-size-matters';
 
 const planeIcon = require('../assets/plane_white.png');
 
@@ -60,11 +60,12 @@ const styles = StyleSheet.create({
   lowContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     flex: 1
   },
   origDestText: {
     color: 'white',
-    fontSize: 32,
+    fontSize: scale(32),
     fontWeight: '200',
     fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined
   },
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   flightNumberText: {
     color: 'white',
     fontWeight: 'bold',
-    marginLeft: 4
+    width: scale(60)
   }
 });
 
