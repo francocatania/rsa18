@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Platform } from 'react-native';
+import { scale } from 'react-native-size-matters';
 
 const takeoffIcon = require('../assets/takeoff_black.png');
 const landIcon = require('../assets/land_black.png');
@@ -32,15 +33,16 @@ const styles = StyleSheet.create({
     margin: 10
   },
   dateLabel: {
-    fontSize: 12
+    fontSize: scale(12)
   },
   timeLabel: {
-    fontSize: 44,
+    fontSize: scale(42),
     fontWeight: '200',
+    fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     margin: 3
   },
   airportLabel: {
-    fontSize: 10,
+    fontSize: scale(10),
     textAlign: 'center'
   }
 });
