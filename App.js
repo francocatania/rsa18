@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 import firebase from 'firebase';
 import HomeScreen from './src/components/screens/HomeScreen';
@@ -7,6 +8,8 @@ import MyTripScreen from './src/components/screens/MyTripScreen';
 import MoreScreen from './src/components/screens/MoreScreen';
 import Login from './src/components/screens/Login';
 import SplashScreen from './src/components/screens/SplashScreen';
+
+Text.defaultProps.allowFontScaling = false;
 
 class App extends React.Component {
   componentDidMount() {
