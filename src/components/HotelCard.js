@@ -16,16 +16,16 @@ import Card from './Card';
 
 const { width } = Dimensions.get('window');
 
-const Hotel = (/*{ 
-  hotelName, 
-  hotelNameRussian, 
-  hotelImgs, 
-  address, 
-  addressRussian, 
-  hotelTelephone, 
-  hotelMail, 
-  hotelWebsite 
-}*/) => {
+const Hotel = (props) => {
+  const {
+    images,
+    name,
+    russianName,
+    phone,
+    mail,
+    website
+  } = props;
+
   const { 
     cardContainer,
     hotelImage,
@@ -38,13 +38,9 @@ const Hotel = (/*{
     iconText,
     buttonContainer
   } = styles;
-  
-  const hotelUrl = 'https://gbsn.org/wp-content/uploads/2017/03/olympic-hotel.jpg';
-  const hotelUrl2 = 'https://images.trvl-media.com/hotels/1000000/10000/7800/7736/7736_195_z.jpg';
-  const hotelUrl3 = 'https://t-ec.bstatic.com/images/hotel/max1024x768/328/32837688.jpg';
-  const hotelName = 'Azimut Olympic Moscow';
+
   const hotelPhoneNumber = {
-    number: '1530981809',
+    number: phone,
     prompt: false
   };
   
@@ -53,15 +49,15 @@ const Hotel = (/*{
   };
 
   const sendEmail = () => {
-    Linking.openURL('mailto:azimuthotel@example.com?cc=soporte@consolid.com');
+    Linking.openURL(`mailto:${mail}?cc=soporte@consolid.com`);
   };
   
   const openWebsite = () => {
-    Linking.openURL('https://en.azimuthotels.com/Russia/azimut-hotel-olympic-moscow/contacts/').catch(err => console.error('An error occurred', err));
+    Linking.openURL(website).catch(err => console.error('An error occurred', err));
   };
 
   const openInGoogleMaps = () => {
-    Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${hotelName}`);
+    Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${name}`);
   };
 
   const buttonColor = Platform.OS === 'ios' ? '#FFFFFF' : '#FF5252';
@@ -77,13 +73,11 @@ const Hotel = (/*{
         pagingEnabled
         showsHorizontalScrollIndicator/*={false}*/
       >
-        <Image source={{ uri: hotelUrl }} style={hotelImage} />
-        <Image source={{ uri: hotelUrl2 }} style={hotelImage} />
-        <Image source={{ uri: hotelUrl3 }} style={hotelImage} />
+        {images.map((img, idx) => <Image source={{ uri: img }} style={hotelImage} key={idx} />)}
       </ScrollView>
       <View style={hotelInfoContainer}>
-        <Text style={hotelTitle}>{hotelName}</Text>
-        <Text style={hotelSubtitle}>Azefhsldkjf Mascaw</Text>
+        <Text style={hotelTitle}>{name}</Text>
+        <Text style={hotelSubtitle}>{russianName}</Text>
         <View style={iconsContainer}>
           <TouchableOpacity onPress={sendEmail}>
             <View style={{ width: 50, alignItems: 'center' }}>
