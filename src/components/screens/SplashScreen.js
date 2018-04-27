@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ImageBackground, StyleSheet, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import firebase from 'firebase';
 import Login from './Login';
 
 class SplashScreen extends Component {
@@ -9,12 +10,16 @@ class SplashScreen extends Component {
     this.state = {
       showLogin: false,
       loginText: '',
-      loginCodes: ['Admin', 'Consolid123']
+      loginCodes: []
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
+      firebase.database().ref('/')
+        .once('value', snapshot => {
+          this.setState({ loginCodes: Object.keys(snapshot.val()) });
+        });
       AsyncStorage.getItem('loginCode').then(response => {
         if (response) {
           this.resetNavigation('HomeRoutes');
@@ -38,7 +43,7 @@ class SplashScreen extends Component {
     });
     this.props.navigation.dispatch(resetAction);
   }
-  
+ 
   async checkLoginText() {
     if (this.state.loginCodes.includes(this.state.loginText)) {
       try {
