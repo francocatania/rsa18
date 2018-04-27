@@ -47,6 +47,8 @@ class Login extends Component {
                 value={this.props.loginText}
                 autoCorrect={false}
                 underlineColorAndroid="#00000000"
+                allowFontScaling={false}
+                autoCapitalize="none"
               />
             </View>
           </KeyboardAvoidingView>
