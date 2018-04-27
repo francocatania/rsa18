@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'flex-start',
     width: '35%'
   },
   icon: {
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     fontSize: scale(12)
   },
   timeLabel: {
-    fontSize: scale(42),
+    fontSize: scale(40),
     fontWeight: '200',
     fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     margin: 3
