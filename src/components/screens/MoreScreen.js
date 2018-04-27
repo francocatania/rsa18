@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, AsyncStorage, Image, Platform } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import Card from '../Card';
 
 class MoreScreen extends Component {
+  onPressLogout() {
+    AsyncStorage.removeItem('loginCode');
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Splash' }),
+      ]
+    });
+    this.props.screenProps.rootNavigation.dispatch(resetAction);
+  }
+
   render() {
+    console.log(this.props.screenProps);
     const buttonColor = Platform.OS === 'ios' ? '#3F51B5' : '#FF5252';
     const whatsappLogo = { uri: 'https://seeklogo.com/images/W/whatsapp-logo-33F6A82887-seeklogo.com.png' };
     const emergencyLogo = { uri: 'https://cdn0.iconfinder.com/data/icons/education-collection-2/32/emergency_cross_contacts_circle_online-512.png' };
@@ -55,7 +68,7 @@ class MoreScreen extends Component {
 
         <View style={{ marginTop: Platform.OS === 'ios' ? 20 : 15 }}>
         <Button
-          onPress={() => AsyncStorage.removeItem('loginCode')}
+          onPress={this.onPressLogout.bind(this)}
           title="Logout"
           color={buttonColor}
         />

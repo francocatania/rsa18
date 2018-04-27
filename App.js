@@ -77,7 +77,8 @@ const MyTripStack = StackNavigator({
 
 const MoreStack = StackNavigator({
   MoreRoot: {
-    screen: MoreScreen,
+    screen: ({ screenProps }) =>
+      <MoreScreen screenProps={{ rootNavigation: screenProps.rootNavigation }} />,
     navigationOptions: {
       title: 'Más',
       headerTintColor: '#FFFFFF',
@@ -94,7 +95,9 @@ const TabNav = TabNavigator(
     Inicio: { screen: HomeStack },
     Agenda: { screen: AgendaStack },
     MiViaje: { screen: MyTripStack },
-    Más: { screen: MoreStack }
+    Más: { screen: ({ screenProps }) =>
+      <MoreStack screenProps={{ rootNavigation: screenProps.rootNavigation }} />
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -135,7 +138,8 @@ const SplashLoginStack = StackNavigator(
       screen: Login
     },
     HomeRoutes: {
-      screen: TabNav
+      screen: ({ navigation }) =>
+        <TabNav screenProps={{ rootNavigation: navigation }} />
     }
   },
   {
