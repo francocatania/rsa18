@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, ScrollView, StyleSheet, ActivityIndicator, AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import FlightCard from '../FlightCard';
 
@@ -12,10 +12,12 @@ class FlightScreen extends Component {
   }
 
   componentDidMount() {
-    firebase.database().ref('consolidbgh18/flights')
-      .once('value', snapshot => {
-        this.setState({ flights: snapshot.val() });
-      });
+    AsyncStorage.getItem('loginCode').then(response => {
+      firebase.database().ref(`${response}/flights`)
+        .once('value', snapshot => {
+          this.setState({ flights: snapshot.val() });
+        });
+    });
   }
 
   render() {
