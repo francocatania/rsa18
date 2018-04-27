@@ -62,7 +62,7 @@ const MyTripStack = StackNavigator({
   MyTripRoot: {
     screen: MyTripScreen,
     navigationOptions: {
-      title: 'Mi Viaje',
+    title: ' Mi Viaje ',
       headerTintColor: '#FFFFFF',
       headerStyle: {
         backgroundColor: '#3F51B5',
@@ -90,7 +90,7 @@ const TabNav = TabNavigator(
   {
     Inicio: { screen: HomeStack },
     Agenda: { screen: AgendaStack },
-    'Mi Viaje': { screen: MyTripStack },
+    MiViaje: { screen: MyTripStack },
     Más: { screen: MoreStack }
   },
   {

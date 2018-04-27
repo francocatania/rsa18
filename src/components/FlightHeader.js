@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, Platform } from 'react-native';
+import { verticalScale } from 'react-native-size-matters';
 
 const planeIcon = require('../assets/plane_white.png');
 
@@ -35,7 +36,7 @@ const FlightHeader = ({ origin, destination, airline, flightNumber, backdropURL 
 
 const styles = StyleSheet.create({
   container: {
-    height: 100
+    height: verticalScale(100)
   },
   backgroundImage: {
     height: '100%',
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
   origDestText: {
     color: 'white',
     fontSize: 32,
-    fontWeight: '200'
+    fontWeight: '200',
+    fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined
   },
   airlineText: {
     color: 'white',

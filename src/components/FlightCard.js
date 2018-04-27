@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { verticalScale } from 'react-native-size-matters';
 import Card from './Card';
 import FlightHeader from './FlightHeader';
 import FlightColumn from './FlightColumn';
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: '100%',
-    height: 50,
+    height: verticalScale(50),
     marginTop: 8
   },
   footerField: {
