@@ -5,6 +5,7 @@ import Card from './Card';
 const NewsCard = ({ title, url, urlToImage, description }) => {
   const articleImage = { uri: urlToImage };
   const articleTitle = title.slice(0, title.length - 14);
+  const articleDescription = description.slice(12);
   const openArticle = () => {
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   };
@@ -19,7 +20,7 @@ const NewsCard = ({ title, url, urlToImage, description }) => {
           <Text style={styles.articleTitle}>{articleTitle}</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.articleSource}>{description}</Text>
+      <Text style={styles.articleSource}>{articleDescription}</Text>
     </Card>
   );
 };
