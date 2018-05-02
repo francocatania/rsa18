@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, AsyncStorage, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage, ScrollView, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 import AgendaDay from '../AgendaDay.js';
 
@@ -21,26 +21,37 @@ class AgendaScreen extends Component {
       });
   }
 
-  render() {
+  renderSpinner() {
+    return (
+      <View style={styles.spinnerContainer}>
+        <ActivityIndicator size="large" style={{ alignSelf: 'center' }} />
+      </View>
+    );
+  }
+
+  renderAgenda() {
     return (
       <ScrollView>
-        {
-          this.state.agenda &&
-          this.state.agenda.map((day, index) => {
-            return (
-              <View style={styles.pageContainer}>
-                <Text style={styles.timeLabel}>{day.weekday} {day.day} de {day.month}</Text>
-                <AgendaDay schedule={day.items} key={index} />
-              </View>
-            );
-          })
-        }
+        {this.state.agenda.map((day, index) => (
+          <View style={styles.pageContainer} key={index}>
+            <Text style={styles.timeLabel}>{day.weekday} {day.day} de {day.month}</Text>
+            <AgendaDay schedule={day.items} />
+          </View>
+        ))}
       </ScrollView>
     );
+  }
+
+  render() {
+    return this.state.agenda ? this.renderAgenda() : this.renderSpinner();
   }
 }
 
 const styles = StyleSheet.create({
+  spinnerContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   pageContainer: {
     flex: 1,
     padding: 10,
