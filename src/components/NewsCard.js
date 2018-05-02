@@ -1,11 +1,18 @@
 import React from 'react';
-import { View, StyleSheet, Text, Linking, Image, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { 
+  View,
+  StyleSheet, 
+  Text, 
+  Linking, 
+  Image, 
+  TouchableOpacity, 
+  TouchableWithoutFeedback, 
+  Dimensions 
+} from 'react-native';
 import Card from './Card';
 
 const NewsCard = ({ title, url, urlToImage, description }) => {
   const articleImage = { uri: urlToImage };
-  const articleTitle = title.slice(0, title.length - 14);
-  const articleDescription = description.slice(12);
   const openArticle = () => {
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   };
@@ -17,10 +24,10 @@ const NewsCard = ({ title, url, urlToImage, description }) => {
           <Image source={articleImage} style={styles.articlePhoto} />
         </TouchableWithoutFeedback>
         <TouchableOpacity onPress={openArticle}>
-          <Text style={styles.articleTitle}>{articleTitle}</Text>
+          <Text style={styles.articleTitle}>{title}</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.articleSource}>{articleDescription}</Text>
+      <Text style={styles.articleSource}>{description}</Text>
     </Card>
   );
 };
@@ -54,6 +61,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#757575'
   },
-})
+});
 
 export default NewsCard;
