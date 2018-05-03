@@ -16,7 +16,7 @@ import Card from './Card';
 
 const { width } = Dimensions.get('window');
 
-const Hotel = (props) => {
+const HotelCard = (props) => {
   const {
     images,
     name,
@@ -49,7 +49,7 @@ const Hotel = (props) => {
   };
 
   const sendEmail = () => {
-    Linking.openURL(`mailto:${mail}?cc=soporte@consolid.com`);
+    Linking.openURL(`mailto:${mail}`);
   };
   
   const openWebsite = () => {
@@ -168,4 +168,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Hotel;
+export default HotelCard;
