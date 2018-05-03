@@ -1,9 +1,61 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Button, AsyncStorage, Image, Platform } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  AsyncStorage,
+  Image,
+  Platform,
+  TouchableOpacity,
+  ActivityIndicator,
+  Linking
+} from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import call from 'react-native-phone-call';
+import firebase from 'firebase';
 import Card from '../Card';
 
+const hospitalIcon = require('../../assets/hospital_black.png');
+const mailIcon = require('../../assets/mail_black.png');
+
 class MoreScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      more: null
+    };
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('loginCode').then(response => {
+      firebase.database().ref(`${response}/more`)
+        .once('value', snapshot => {
+          this.setState({ more: snapshot.val() });
+        });
+    });
+  }
+
+  onPressJoinWhatsapp() {
+    Linking.openURL(this.state.more.whatsapp).catch(console.error);
+  }
+
+  onPressCallInsurance() {
+    call({ number: this.state.more.insuranceNumber, prompt: false }).catch(console.error);
+  }
+
+  onPressWebInsurance() {
+    Linking.openURL(this.state.more.insuranceWeb).catch(console.error);
+  }
+
+  onPressMailAgency() {
+    Linking.openURL(`mailto:${this.state.more.agencyMail}`).catch(console.error);
+  }
+
+  onPressClosestHospital() {
+    Linking.openURL('https://www.google.com/maps/search/?api=1&query=hospital').catch(console.error);
+  }
+
   onPressLogout() {
     AsyncStorage.removeItem('loginCode');
     const resetAction = NavigationActions.reset({
@@ -15,7 +67,15 @@ class MoreScreen extends Component {
     this.props.screenProps.rootNavigation.dispatch(resetAction);
   }
 
-  render() {
+  renderSpinner() {
+    return (
+      <View style={styles.spinnerContainer}>
+        <ActivityIndicator size="large" style={{ alignSelf: 'center' }} />
+      </View>
+    );
+  }
+
+  renderContent() {
     const buttonColor = Platform.OS === 'ios' ? '#3F51B5' : '#FF5252';
     const whatsappLogo = { uri: 'https://seeklogo.com/images/W/whatsapp-logo-33F6A82887-seeklogo.com.png' };
     const emergencyLogo = { uri: 'https://cdn0.iconfinder.com/data/icons/education-collection-2/32/emergency_cross_contacts_circle_online-512.png' };
@@ -24,45 +84,55 @@ class MoreScreen extends Component {
     return (
       <View style={{ padding: 10 }}>
         <Card>
-          <View style={styles.rowContent}>
-            <Image source={whatsappLogo} style={styles.icon} />
-            <View>
-              <Text style={styles.contentTitle}>Unite al grupo de WhatsApp</Text>
-              <Text style={styles.contentSubtitle}>Compartí todo el viaje con tu grupo</Text>
+          <TouchableOpacity onPress={this.onPressJoinWhatsapp.bind(this)}>
+            <View style={styles.rowContent}>
+              <Image source={whatsappLogo} style={styles.icon} />
+              <View>
+                <Text style={styles.contentTitle}>Unite al grupo de WhatsApp</Text>
+                <Text style={styles.contentSubtitle}>Compartí todo el viaje con tu grupo</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.separator} />
-          <View style={styles.rowContent}>
-            <Image source={emergencyLogo} style={styles.icon} />
-            <View>
-              <Text style={styles.contentTitle}>Contacto de Emergencia</Text>
-              <Text style={styles.contentSubtitle}>Llamada directa a tu Asistencia al Viajero</Text>
+          <TouchableOpacity onPress={this.onPressCallInsurance.bind(this)}>
+            <View style={styles.rowContent}>
+              <Image source={emergencyLogo} style={styles.icon} />
+              <View>
+                <Text style={styles.contentTitle}>Contacto de Emergencia</Text>
+                <Text style={styles.contentSubtitle}>Llamada directa a tu Asistencia al Viajero</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </Card>
 
         <Card style={{ marginTop: 10 }}>
-          <View style={styles.rowContent}>
-            <Image source={infoLogo} style={styles.icon} />
-            <View>
-              <Text style={styles.contentTitle}>Asistencia Médica</Text>
-              <Text style={styles.contentSubtitle}>Toda la información acerca de tu cobertura</Text>
+          <TouchableOpacity onPress={this.onPressWebInsurance.bind(this)}>
+            <View style={styles.rowContent}>
+              <Image source={infoLogo} style={styles.icon} />
+              <View>
+                <Text style={styles.contentTitle}>Asistencia Médica</Text>
+                <Text style={styles.contentSubtitle}>Toda la información acerca de tu cobertura</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.rowContent}>
-            <Image source={infoLogo} style={styles.icon} />
-            <View>
-              <Text style={styles.contentTitle}>Contacto de Emergencia</Text>
-              <Text style={styles.contentSubtitle}>Llamada directa a tu Asistencia al Viajero</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onPressMailAgency.bind(this)}>
+            <View style={styles.rowContent}>
+              <Image source={mailIcon} style={styles.icon} />
+              <View>
+                <Text style={styles.contentTitle}>Contactá la Agencia</Text>
+                <Text style={styles.contentSubtitle}>Envianos un mail con lo que necesites</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.rowContent}>
-            <Image source={infoLogo} style={styles.icon} />
-            <View>
-              <Text style={styles.contentTitle}>Contacto de Emergencia</Text>
-              <Text style={styles.contentSubtitle}>Llamada directa a tu Asistencia al Viajero</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onPressClosestHospital.bind(this)}>
+            <View style={styles.rowContent}>
+              <Image source={hospitalIcon} style={styles.icon} />
+              <View>
+                <Text style={styles.contentTitle}>Hospital más cercano</Text>
+                <Text style={styles.contentSubtitle}>Mapa de hospitales de la zona</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </Card>
 
         <View style={{ marginTop: Platform.OS === 'ios' ? 20 : 15 }}>
@@ -75,9 +145,17 @@ class MoreScreen extends Component {
       </View>
     );
   }
+
+  render() {    
+    return this.state.more ? this.renderContent() : this.renderSpinner();
+  }
 }
 
 const styles = StyleSheet.create({
+  spinnerContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   rowContent: {
     flexDirection: 'row', 
     alignItems: 'center', 
