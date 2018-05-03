@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { scale, verticalScale } from 'react-native-size-matters';
 import Card from './Card';
 
-const cardBackground = require('../assets/Background-World-Cup-2018-Blue.jpg');
+const cardBackground = require('../assets/worldCupBlueBackground.jpg');
 
 const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, stadium }) => {
   const { 

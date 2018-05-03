@@ -47,7 +47,7 @@ class HomeScreen extends Component {
           <Text style={styles.title}>Próximo partido</Text>
           <MatchCard {...this.state.match} />
           <Text style={styles.title}>Noticias</Text>
-          <NewsList />
+          <NewsList news={this.state.news} />
         </View>
       </ScrollView>
     );
