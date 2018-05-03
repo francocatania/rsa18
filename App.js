@@ -1,7 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, Platform } from 'react-native';
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 import firebase from 'firebase';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from './src/components/screens/HomeScreen';
 import AgendaScreen from './src/components/screens/AgendaScreen';
 import MyTripScreen from './src/components/screens/MyTripScreen';
@@ -104,15 +106,28 @@ const TabNav = TabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Home') {
-          iconName = `ios-home${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Agenda') {
-          iconName = `ios-list-box${focused ? '' : '-outline'}`;
+        if (Platform.OS === 'ios') {
+          if (routeName === 'Inicio') {
+            iconName = `ios-home${focused ? '' : '-outline'}`;
+          } else if (routeName === 'Agenda') {
+            iconName = `ios-list-box${focused ? '' : '-outline'}`;
+          } else if (routeName === 'MiViaje') {
+            iconName = `ios-briefcase${focused ? '' : '-outline'}`;
+          } else if (routeName === 'Más') {
+            iconName = `ios-menu${focused ? '' : '-outline'}`;
+          }
+          return <Ionicons name={iconName} size={25} color={tintColor} />;
         }
-  
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        // return <Ionicons name={iconName} size={25} color={tintColor} />;
+        if (routeName === 'Inicio') {
+          iconName = 'home';
+        } else if (routeName === 'Agenda') {
+          iconName = 'format-list-bulleted';
+        } else if (routeName === 'MiViaje') {
+          iconName = 'work';
+        } else if (routeName === 'Más') {
+          iconName = 'menu';
+        }
+        return <MaterialIcons name={iconName} size={25} color={tintColor} />;
       },
     }),
     tabBarOptions: {

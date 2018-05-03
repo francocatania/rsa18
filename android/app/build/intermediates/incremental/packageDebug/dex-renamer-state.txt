@@ -1,0 +1,4 @@
+#Thu May 03 16:37:32 ART 2018
+base.0=/Users/felipecatania/Documents/Repos/rsa18/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/felipecatania/Documents/Repos/rsa18/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

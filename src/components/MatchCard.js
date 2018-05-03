@@ -28,7 +28,7 @@ const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, sta
         <View style={badgeAndTimeContainer}>
           <View style={badgeContainer}>
             <Image source={{ uri: homeBadge }} style={badge} />
-            <Text style={matchDescription}>{home}</Text>
+            <Text style={[matchDescription, { marginTop: 5 }]}>{home}</Text>
           </View>
           <View style={matchTimeContainer}>
             <Text style={matchDate}>{date}</Text>
@@ -36,7 +36,7 @@ const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, sta
           </View>
           <View style={badgeContainer}>
             <Image source={{ uri: awayBadge }} style={badge} />
-            <Text style={matchDescription}>{away}</Text>
+            <Text style={[matchDescription, { marginTop: 5 }]}>{away}</Text>
           </View>
         </View>
         <Text style={matchStadium}>{stadium}</Text>
