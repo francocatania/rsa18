@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import Card from './Card';
 
-const NewsCard = ({ title, url, urlToImage, description }) => {
-  const articleImage = { uri: urlToImage };
+const NewsCard = ({ title, link, imgUrl, description }) => {
+  const articleImage = { uri: imgUrl };
   const openArticle = () => {
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+    Linking.openURL(link).catch(err => console.error('An error occurred', err));
   };
 
   return (
@@ -27,7 +27,7 @@ const NewsCard = ({ title, url, urlToImage, description }) => {
           <Text style={styles.articleTitle}>{title}</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.articleSource}>{description}</Text>
+      {description && <Text style={styles.articleDescription}>{description}</Text>}
     </Card>
   );
 };
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   articleHeader: {
     flexDirection: 'row', 
     justifyContent: 'flex-start',
-    marginBottom: 10,
   },
   articlePhoto: {
     height: photoSide,
@@ -57,7 +56,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#212121',
   },
-  articleSource: {
+  articleDescription: {
+    marginTop: 10,
     fontSize: 14,
     color: '#757575'
   },
