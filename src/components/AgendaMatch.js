@@ -5,7 +5,7 @@ import Card from './Card';
 
 const cardBackground = require('../assets/Background-World-Cup-2018-Blue.jpg');
 
-const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, stadium }) => {
+const AgendaMatch = ({ instance, home, homeBadge, away, awayBadge, stadium }) => {
   const { 
     card,
     backgroundImage,
@@ -15,8 +15,7 @@ const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, sta
     badgeContainer,
     badge,
     matchTimeContainer,
-    matchDate,
-    matchTime,
+    vs,
     matchStadium
   } = styles;
   
@@ -24,22 +23,20 @@ const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, sta
     <Card style={card}>
       <Image source={cardBackground} style={backgroundImage} />
       <View style={contentContainer}>
-        <Text style={matchDescription}>{instance}</Text>
+        <Text style={matchStadium}>{stadium}</Text>
         <View style={badgeAndTimeContainer}>
           <View style={badgeContainer}>
             <Image source={{ uri: homeBadge }} style={badge} />
             <Text style={matchDescription}>{home}</Text>
           </View>
           <View style={matchTimeContainer}>
-            <Text style={matchDate}>{date}</Text>
-            <Text style={matchTime}>{time}</Text>
+            <Text style={vs}>vs</Text>
           </View>
           <View style={badgeContainer}>
             <Image source={{ uri: awayBadge }} style={badge} />
             <Text style={matchDescription}>{away}</Text>
           </View>
         </View>
-        <Text style={matchStadium}>{stadium}</Text>
       </View>
     </Card>
   );
@@ -47,8 +44,7 @@ const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, sta
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: 10,
-    marginBottom: 20
+    marginBottom: 5
   },
   backgroundImage: {
     height: '100%',
@@ -64,8 +60,7 @@ const styles = StyleSheet.create({
   badgeAndTimeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'flex-start',
-    marginTop: 20
+    alignItems: 'flex-start'
   },
   badgeContainer: {
     width: '30%',
@@ -82,18 +77,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  matchDate: {
-    color: '#FFFFFF',
-  },
-  matchTime: {
-    color: '#FFFFFF',
-    fontSize: scale(25)
-  },
   matchStadium: {
-    marginTop: 20,
+    color: '#FFFFFF',
     alignSelf: 'center',
-    color: '#FFFFFF'
-  }
+    // marginBottom: 5
+  },
+  vs: {
+    color: '#FFFFFF',
+    fontSize: scale(20)
+  },
 });
 
-export default MatchCard;
+export default AgendaMatch;
