@@ -5,7 +5,7 @@ import Card from './Card';
 
 const cardBackground = require('../assets/worldCupBlueBackground.jpg');
 
-const AgendaMatch = ({ instance, home, homeBadge, away, awayBadge, stadium }) => {
+const AgendaMatch = ({ home, homeBadge, away, awayBadge, stadium }) => {
   const { 
     card,
     backgroundImage,
