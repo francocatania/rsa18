@@ -3,11 +3,15 @@ import { StyleSheet, Text } from 'react-native';
 import Timeline from 'react-native-timeline-listview';
 import FlightHeader from './FlightHeader';
 import Card from './Card';
+import AgendaMatch from './AgendaMatch';
 
 const AgendaDay = ({ schedule }) => {
   const renderDetail = (rowData) => {
     if (rowData.type === 'flight') {
       return <Card><FlightHeader {...rowData} /></Card>;
+    }
+    if (rowData.type === 'match') {
+      return <AgendaMatch {...rowData} />;
     }
     return (
       <Card style={styles.agendaDay}>
