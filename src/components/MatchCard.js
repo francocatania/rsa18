@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   badgeAndTimeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'flex-start',
     marginTop: 20
   },
   badgeContainer: {
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   matchTimeContainer: {
+    height: verticalScale(55),
     alignItems: 'center',
     justifyContent: 'center',
   },
