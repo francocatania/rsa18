@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import NewsList from '../NewsList';
 import MatchCard from '../MatchCard';
@@ -9,7 +9,8 @@ class HomeScreen extends Component {
     super();
     this.state = {
       match: null,
-      news: null
+      news: null,
+      logos: null
     };
   }
 
@@ -18,6 +19,13 @@ class HomeScreen extends Component {
       .once('value', snapshot => {
         this.setState({ match: snapshot.val().match, news: snapshot.val().news });
       });
+    AsyncStorage.getItem('loginCode')
+    .then(response => {
+      firebase.database().ref(`${response}/logos`)
+        .once('value', snapshot => {
+          this.setState({ logos: snapshot.val() });
+        });
+    });
   }
 
   renderSpinner() {
@@ -35,14 +43,9 @@ class HomeScreen extends Component {
       <ScrollView>
         <View style={styles.pageContainer}>
           <View style={styles.logosContainer}>
-            <Image 
-              source={{ uri: patagonikLogoURL }}
-              style={[styles.logoImage, { resizeMode: 'cover' }]}
-            />
-            <Image
-              source={{ uri: masterLogoURL }}
-              style={[styles.logoImage, { resizeMode: 'contain' }]}
-            />
+            {this.state.logos.map(logo => (
+              <Image source={{ uri: logo }} style={styles.logoImage} />)
+            )}
           </View>
           <Text style={styles.title}>Próximo partido</Text>
           <MatchCard {...this.state.match} />
@@ -54,7 +57,9 @@ class HomeScreen extends Component {
   }
 
   render() {
-    return this.state.match && this.state.news ? this.renderHome() : this.renderSpinner(); 
+    return this.state.match && this.state.news && this.state.logos ? 
+      this.renderHome() : 
+      this.renderSpinner(); 
   }
 }
 
@@ -77,7 +82,8 @@ const styles = StyleSheet.create({
     height: '100%',
     flex: 1,
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    resizeMode: 'contain'
   },
   title: {
     fontSize: 16,
