@@ -9,6 +9,8 @@ import {
   Animated
 } from 'react-native';
 
+const fifaCupLogo = require('../../assets/fifa_copa_logo.png');
+
 class Login extends Component {
   constructor() {
     super();
@@ -28,7 +30,6 @@ class Login extends Component {
   }
 
   render() {
-    const fifaWorldCupLogoURL = 'http://pluspng.com/img-png/logo-fifa-world-cup-2018-png-ih0-redbubble-net-image-144004343-2754-sticker-375x360-u4-png-375.png';
     return (
       <Animated.View style={[styles.container, { opacity: this.state.fadeAnim }]}>
         <View style={styles.backdropView}>
@@ -55,7 +56,7 @@ class Login extends Component {
 
           <View style={styles.fifaLogoBox}>
             <Image 
-              source={{ uri: fifaWorldCupLogoURL }}
+              source={fifaCupLogo}
               style={styles.fifaLogo}
             />
           </View>
@@ -109,13 +110,14 @@ const styles = StyleSheet.create({
   },
   fifaLogoBox: {
     width: '40%',
-    height: '15%',
+    height: '25%',
     marginBottom: 20
   },
   fifaLogo: {
     height: '100%',
     flex: 1,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
+    alignSelf: 'center'
   },
 });
 
