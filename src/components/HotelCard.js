@@ -12,6 +12,8 @@ import {
   Platform, 
   TouchableOpacity 
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Card from './Card';
 
 const { width } = Dimensions.get('window');
@@ -34,7 +36,6 @@ const HotelCard = (props) => {
     hotelSubtitle,
     carousel,
     iconsContainer,
-    icon,
     iconText,
     buttonContainer
   } = styles;
@@ -61,9 +62,6 @@ const HotelCard = (props) => {
   };
 
   const buttonColor = Platform.OS === 'ios' ? '#FFFFFF' : '#FF5252';
-  const mailIcon = { uri: 'https://www.greycon.com/wp-content/uploads/2015/09/icon-mail-light.png' };
-  const websiteIcon = { uri: 'http://pluspng.com/img-png/website-png--600.png' };
-  const callIcon = { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnQDrmixVg0fhaeSpqQ7vPakcc6u77kK6msdPUwvDYTEmENMm6' };
 
   return (
     <Card style={cardContainer}>
@@ -81,30 +79,30 @@ const HotelCard = (props) => {
         <View style={iconsContainer}>
           <TouchableOpacity onPress={sendEmail}>
             <View style={{ width: 50, alignItems: 'center' }}>
-              <Image
-                style={[styles.icon, { width: 40 }]}
-                source={mailIcon}
-              />
+              {Platform.OS === 'ios' ?
+                <Ionicons name="ios-mail" color="#3F51B5" size={40} /> :
+                <MaaterialIcons name="email" color="#3F51B5" size={40} />
+              }
               <Text style={iconText}>Mail</Text>
             </View>
           </TouchableOpacity>
           <View style={{ width: 1, height: '100%', backgroundColor: 'lightgray' }} />
           <TouchableOpacity onPress={openWebsite}>
             <View style={{ width: 60, alignItems: 'center' }}>
-              <Image
-                style={styles.icon}
-                source={websiteIcon}
-              />
+              {Platform.OS === 'ios' ?
+                <Ionicons name="ios-globe-outline" color="#3F51B5" size={40} /> :
+                <MaaterialIcons name="public" color="#3F51B5" size={40} />
+              }
               <Text style={{ color: 'gray', fontSize: 12, marginTop: 5 }}>Sitio Web</Text>
             </View>
           </TouchableOpacity>
           <View style={{ width: 1, height: '100%', backgroundColor: 'lightgray' }} />
           <TouchableOpacity onPress={phoneCall}>
             <View style={{ width: 50, alignItems: 'center' }}>
-              <Image
-                style={icon}
-                source={callIcon}
-              />
+              {Platform.OS === 'ios' ?
+                <Ionicons name="ios-call" color="#3F51B5" size={40} /> :
+                <MaaterialIcons name="phone" color="#3F51B5" size={40} />
+              }
               <Text style={{ color: 'gray', fontSize: 12, marginTop: 5 }}>Llamar</Text>
             </View>
           </TouchableOpacity>
@@ -152,10 +150,6 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     marginTop: 20, 
     height: 60 
-  },
-  icon: {
-    width: 30,
-    height: 30
   },
   iconText: { 
     color: 'gray',
