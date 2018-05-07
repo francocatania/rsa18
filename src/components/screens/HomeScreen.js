@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, AsyncStorage } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, AsyncStorage, NetInfo, Platform } from 'react-native';
 import firebase from 'firebase';
 import NewsList from '../NewsList';
 import MatchCard from '../MatchCard';
@@ -15,18 +15,53 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
+    if (Platform.OS === 'ios') {
+      fetch('https://www.google.com')
+      .then(() => {
+        this.getFromFirebase();
+      })
+      .catch(() => {
+        this.getFromStorage();
+      });
+    } else { 
+      NetInfo.isConnected.fetch().done(isConnected => {
+        if (isConnected) {
+          this.getFromFirebase();
+        } else {
+          this.getFromStorage();
+        }
+      });
+    }
+  }
+
+  getFromFirebase() {
     firebase.database().ref('home')
       .once('value', snapshot => {
+        AsyncStorage.setItem('home', JSON.stringify(snapshot.val()));
         this.setState({ match: snapshot.val().match, news: snapshot.val().news });
       });
     AsyncStorage.getItem('loginCode')
-    .then(response => {
-      firebase.database().ref(`${response}/logos`)
-        .once('value', snapshot => {
-          this.setState({ logos: snapshot.val() });
+      .then(response => {
+        firebase.database().ref(`${response}/logos`)
+          .once('value', snapshot => {
+              AsyncStorage.setItem('logos', JSON.stringify(snapshot.val()));
+              this.setState({ logos: snapshot.val() });
+            });
         });
+  }
+
+  getFromStorage() {
+    AsyncStorage.getItem('home')
+    .then(response => {
+      const parsed = JSON.parse(response);
+      this.setState({ match: parsed.match, news: parsed.news });
+    });
+    AsyncStorage.getItem('logos')
+    .then(response => {
+      this.setState({ logos: JSON.parse(response) });
     });
   }
+
 
   renderSpinner() {
     return (
@@ -37,8 +72,6 @@ class HomeScreen extends Component {
   }
 
   renderHome() {
-    const patagonikLogoURL = 'https://firebasestorage.googleapis.com/v0/b/autho-c54b4.appspot.com/o/patagonik_logo.png?alt=media&token=70c96e9f-2835-49a2-9c62-c3443f502e70';
-    const masterLogoURL = 'http://adsynergy.co.uk/wp-content/uploads/2017/06/mastercard-logo1.png';
     return (
       <ScrollView>
         <View style={styles.pageContainer}>

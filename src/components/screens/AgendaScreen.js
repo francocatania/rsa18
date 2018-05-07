@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, AsyncStorage, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage, ScrollView, ActivityIndicator, Platform, NetInfo } from 'react-native';
 import firebase from 'firebase';
 import AgendaDay from '../AgendaDay.js';
 
@@ -12,13 +12,41 @@ class AgendaScreen extends Component {
   }
 
   componentDidMount() {
+    if (Platform.OS === 'ios') {
+      fetch('https://www.google.com')
+      .then(() => {
+        this.getFromFirebase();
+      })
+      .catch(() => {
+        this.getFromStorage();
+      });
+    } else { 
+      NetInfo.isConnected.fetch().done(isConnected => {
+        if (isConnected) {
+          this.getFromFirebase();
+        } else {
+          this.getFromStorage();
+        }
+      });
+    }
+  }
+
+  getFromFirebase() {
     AsyncStorage.getItem('loginCode')
       .then(response => {
         firebase.database().ref(`${response}/agenda`)
           .once('value', snapshot => {
-            this.setState({ agenda: snapshot.val() });
-          });
-      });
+              AsyncStorage.setItem('agenda', JSON.stringify(snapshot.val()));
+              this.setState({ agenda: snapshot.val() });
+            });
+        });
+  }
+
+  getFromStorage() {
+    AsyncStorage.getItem('agenda')
+    .then(response => {
+      this.setState({ agenda: JSON.parse(response) });
+    });
   }
 
   renderSpinner() {

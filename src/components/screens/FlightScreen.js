@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, ActivityIndicator, AsyncStorage } from 'react-native';
+import { View, ScrollView, StyleSheet, ActivityIndicator, AsyncStorage, Platform, NetInfo } from 'react-native';
 import firebase from 'firebase';
 import FlightCard from '../FlightCard';
 
@@ -12,11 +12,40 @@ class FlightScreen extends Component {
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('loginCode').then(response => {
-      firebase.database().ref(`${response}/flights`)
-        .once('value', snapshot => {
-          this.setState({ flights: snapshot.val() });
+    if (Platform.OS === 'ios') {
+      fetch('https://www.google.com')
+      .then(() => {
+        this.getFromFirebase();
+      })
+      .catch(() => {
+        this.getFromStorage();
+      });
+    } else { 
+      NetInfo.isConnected.fetch().done(isConnected => {
+        if (isConnected) {
+          this.getFromFirebase();
+        } else {
+          this.getFromStorage();
+        }
+      });
+    }
+  }
+
+  getFromFirebase() {
+    AsyncStorage.getItem('loginCode')
+      .then(response => {
+        firebase.database().ref(`${response}/flights`)
+          .once('value', snapshot => {
+              AsyncStorage.setItem('flights', JSON.stringify(snapshot.val()));
+              this.setState({ flights: snapshot.val() });
+            });
         });
+  }
+
+  getFromStorage() {
+    AsyncStorage.getItem('flights')
+    .then(response => {
+      this.setState({ flights: JSON.parse(response) });
     });
   }
 

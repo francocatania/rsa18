@@ -6,19 +6,7 @@ import Card from './Card';
 const cardBackground = require('../assets/worldCupBlueBackground.jpg');
 
 const MatchCard = ({ instance, home, homeBadge, away, awayBadge, date, time, stadium }) => {
-  const { 
-    card,
-    backgroundImage,
-    contentContainer,
-    matchDescription,
-    badgeAndTimeContainer,
-    badgeContainer,
-    badge,
-    matchTimeContainer,
-    matchDate,
-    matchTime,
-    matchStadium
-  } = styles;
+  const { card, backgroundImage, contentContainer, matchDescription, badgeAndTimeContainer, badgeContainer, badge, matchTimeContainer, matchDate, matchTime, matchStadium } = styles;
   
   return (
     <Card style={card}>
