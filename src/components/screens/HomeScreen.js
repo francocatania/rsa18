@@ -45,7 +45,9 @@ class HomeScreen extends Component {
         firebase.database().ref(`${response}/logos`)
           .once('value', snapshot => {
               AsyncStorage.setItem('logos', JSON.stringify(snapshot.val()));
-              this.setState({ logos: snapshot.val() });
+              Array.isArray(snapshot) ?
+              this.setState({ logos: snapshot.val() }) :
+              this.setState({ logos: [] });
             });
         });
   }
@@ -75,11 +77,13 @@ class HomeScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.pageContainer}>
+          {this.state.logos.length > 1 &&
           <View style={styles.logosContainer}>
             {this.state.logos.map(logo => (
               <Image source={{ uri: logo }} style={styles.logoImage} />)
             )}
           </View>
+          }
           <Text style={styles.title}>Próximo partido</Text>
           <MatchCard {...this.state.match} />
           <Text style={styles.title}>Noticias</Text>
