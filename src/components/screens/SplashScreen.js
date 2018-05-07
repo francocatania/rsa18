@@ -4,6 +4,8 @@ import { NavigationActions } from 'react-navigation';
 import firebase from 'firebase';
 import Login from './Login';
 
+const splashImg = require('../../assets/splash_russia_background.jpg');
+
 class SplashScreen extends Component {
   constructor() {
     super();
@@ -56,12 +58,11 @@ class SplashScreen extends Component {
   }
 
   render() {
-    const russiaImage = 'https://s-i.huffpost.com/gen/1283653/images/o-RUSSIAN-HISTORY-facebook.jpg';
     return (
       <View>
         <ImageBackground
           style={styles.backdrop} 
-          source={{ uri: russiaImage }}
+          source={splashImg}
         >
           <View style={styles.backdropView}>
             {this.state.showLogin && 
