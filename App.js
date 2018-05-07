@@ -12,6 +12,7 @@ import Login from './src/components/screens/Login';
 import SplashScreen from './src/components/screens/SplashScreen';
 
 Text.defaultProps.allowFontScaling = false;
+console.disableYellowBox = true;
 
 class App extends React.Component {
   componentDidMount() {
