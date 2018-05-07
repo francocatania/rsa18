@@ -22,12 +22,12 @@ const AgendaDay = ({ schedule }) => {
   };
 
   return (
-      <Timeline
-        data={schedule}
-        renderDetail={renderDetail}
-        circleColor='#FF5252'
-        lineColor='#FF5252'
-      />
+    <Timeline
+      data={schedule}
+      renderDetail={renderDetail}
+      circleColor='#FF5252'
+      lineColor='#FF5252'
+    />
   );
 };
 

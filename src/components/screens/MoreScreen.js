@@ -1,16 +1,5 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  AsyncStorage,
-  Image,
-  Platform,
-  TouchableOpacity,
-  ActivityIndicator,
-  Linking
-} from 'react-native';
+import { StyleSheet, View, Text, Button, AsyncStorage, Image, Platform, TouchableOpacity, ActivityIndicator, Linking, NetInfo } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import call from 'react-native-phone-call';
 import firebase from 'firebase';
@@ -28,11 +17,40 @@ class MoreScreen extends Component {
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('loginCode').then(response => {
-      firebase.database().ref(`${response}/more`)
-        .once('value', snapshot => {
-          this.setState({ more: snapshot.val() });
+    if (Platform.OS === 'ios') {
+      fetch('https://www.google.com')
+      .then(() => {
+        this.getFromFirebase();
+      })
+      .catch(() => {
+        this.getFromStorage();
+      });
+    } else { 
+      NetInfo.isConnected.fetch().done(isConnected => {
+        if (isConnected) {
+          this.getFromFirebase();
+        } else {
+          this.getFromStorage();
+        }
+      });
+    }
+  }
+
+  getFromFirebase() {
+    AsyncStorage.getItem('loginCode')
+      .then(response => {
+        firebase.database().ref(`${response}/more`)
+          .once('value', snapshot => {
+              AsyncStorage.setItem('more', JSON.stringify(snapshot.val()));
+              this.setState({ more: snapshot.val() });
+            });
         });
+  }
+
+  getFromStorage() {
+    AsyncStorage.getItem('more')
+    .then(response => {
+      this.setState({ more: JSON.parse(response) });
     });
   }
 

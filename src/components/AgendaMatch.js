@@ -6,18 +6,7 @@ import Card from './Card';
 const cardBackground = require('../assets/worldCupBlueBackground.jpg');
 
 const AgendaMatch = ({ home, homeBadge, away, awayBadge, stadium }) => {
-  const { 
-    card,
-    backgroundImage,
-    contentContainer,
-    matchDescription,
-    badgeAndTimeContainer,
-    badgeContainer,
-    badge,
-    matchTimeContainer,
-    vs,
-    matchStadium
-  } = styles;
+  const { card, backgroundImage, contentContainer, matchDescription, badgeAndTimeContainer, badgeContainer, badge, matchTimeContainer, vs, matchStadium } = styles;
   
   return (
     <Card style={card}>
@@ -80,7 +69,6 @@ const styles = StyleSheet.create({
   matchStadium: {
     color: '#FFFFFF',
     alignSelf: 'center',
-    // marginBottom: 5
   },
   vs: {
     color: '#FFFFFF',

@@ -18,27 +18,8 @@ import Card from './Card';
 
 const { width } = Dimensions.get('window');
 
-const HotelCard = (props) => {
-  const {
-    images,
-    name,
-    russianName,
-    phone,
-    mail,
-    website
-  } = props;
-
-  const { 
-    cardContainer,
-    hotelImage,
-    hotelInfoContainer,
-    hotelTitle,
-    hotelSubtitle,
-    carousel,
-    iconsContainer,
-    iconText,
-    buttonContainer
-  } = styles;
+const HotelCard = ({ images, name, russianName, phone, mail, website }) => {
+  const { cardContainer, hotelImage, hotelInfoContainer, hotelTitle, hotelSubtitle, carousel, iconsContainer, iconText, buttonContainer } = styles;
 
   const hotelPhoneNumber = {
     number: phone,

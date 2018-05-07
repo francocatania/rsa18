@@ -1,14 +1,5 @@
 import React from 'react';
-import { 
-  View,
-  StyleSheet, 
-  Text, 
-  Linking, 
-  Image, 
-  TouchableOpacity, 
-  TouchableWithoutFeedback, 
-  Dimensions 
-} from 'react-native';
+import { View, StyleSheet, Text, Linking, Image, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Card from './Card';
 
 const NewsCard = ({ title, link, imgUrl, description }) => {

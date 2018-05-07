@@ -5,16 +5,7 @@ import { scale, verticalScale } from 'react-native-size-matters';
 const planeIcon = require('../assets/plane_white.png');
 
 const FlightHeader = ({ origin, destination, airline, flightNumber, backdropURL }) => {
-  const { 
-    container,
-    backgroundImage,
-    contentContainer,
-    origDestContainer,
-    lowContainer,
-    origDestText,
-    airlineText,
-    flightNumberText
-  } = styles;
+  const { container, backgroundImage, contentContainer, origDestContainer, lowContainer, origDestText, airlineText, flightNumberText } = styles;
   
   return (
     <View style={container}>

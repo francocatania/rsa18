@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, AsyncStorage, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, AsyncStorage, ActivityIndicator, Platform, NetInfo } from 'react-native';
 import firebase from 'firebase';
 import HotelCard from '../HotelCard';
 
@@ -12,11 +12,40 @@ class HotelScreen extends Component {
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('loginCode').then(response => {
-      firebase.database().ref(`${response}/hotels`)
-        .once('value', snapshot => {
-          this.setState({ hotels: snapshot.val() });
+    if (Platform.OS === 'ios') {
+      fetch('https://www.google.com')
+      .then(() => {
+        this.getFromFirebase();
+      })
+      .catch(() => {
+        this.getFromStorage();
+      });
+    } else { 
+      NetInfo.isConnected.fetch().done(isConnected => {
+        if (isConnected) {
+          this.getFromFirebase();
+        } else {
+          this.getFromStorage();
+        }
+      });
+    }
+  }
+
+  getFromFirebase() {
+    AsyncStorage.getItem('loginCode')
+      .then(response => {
+        firebase.database().ref(`${response}/hotels`)
+          .once('value', snapshot => {
+              AsyncStorage.setItem('hotels', JSON.stringify(snapshot.val()));
+              this.setState({ hotels: snapshot.val() });
+            });
         });
+  }
+
+  getFromStorage() {
+    AsyncStorage.getItem('hotels')
+    .then(response => {
+      this.setState({ hotels: JSON.parse(response) });
     });
   }
 

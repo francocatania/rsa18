@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import { 
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TextInput,
-  KeyboardAvoidingView,
-  Animated
-} from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView, Animated } from 'react-native';
 
 const fifaCupLogo = require('../../assets/fifa_copa_logo.png');
 

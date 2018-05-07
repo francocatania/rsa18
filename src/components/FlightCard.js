@@ -6,26 +6,8 @@ import FlightHeader from './FlightHeader';
 import FlightColumn from './FlightColumn';
 
 const FlightCard = (props) => {
-  const {
-    airline,
-    arrival,
-    departure,
-    backdropURL,
-    cabin,
-    destination,
-    origin,
-    flightNumber,
-    plane,
-    duration
-  } = props;
-
-  const dataForHeader = {
-    origin,
-    destination,
-    airline,
-    flightNumber,
-    backdropURL
-  };
+  const { airline, arrival, departure, backdropURL, cabin, destination, origin, flightNumber, plane, duration } = props;
+  const dataForHeader = { origin, destination, airline, flightNumber, backdropURL };
 
   return (
     <Card style={{ marginBottom: 20 }}>
