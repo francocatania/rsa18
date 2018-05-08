@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, AsyncStorage, NetInfo, Platform } from 'react-native';
 import firebase from 'firebase';
+import NoConnectionScreen from './NoConnectionScreen';
 import NewsList from '../NewsList';
 import MatchCard from '../MatchCard';
 
